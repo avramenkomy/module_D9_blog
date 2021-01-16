@@ -17,7 +17,7 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название поста')
     author = models.ForeignKey(User, null=True, default=None, on_delete=models.CASCADE, verbose_name='Автор')
-    category = models.ForeignKey(Category, null=True, blank=True, on_delete = models.SET_NULL, related_name='category', verbose_name='Категория')
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete = models.SET_NULL, related_name='posts', verbose_name='Категория')
     slug = models.SlugField()
     status = models.CharField(max_length=10, choices=[('D', 'draft'), ('P', 'published')])
     content = models.TextField(verbose_name='Содержание статьи')

@@ -7,16 +7,22 @@ class AuthorSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'first_name', 'last_name']
 
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    posts = serializers.StringRelatedField(many=True, read_only=True)
+
+
+    class Meta:
+        model = Category
+        fields = ['id', 'title', 'posts']
+
+
 class PostSerializer(serializers.ModelSerializer):
 
     author = AuthorSerializer(required=False)
+    category = serializers.StringRelatedField(many=False)
 
     class Meta:
         model = Post
-        fields = '__all__'
-
-
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Category
         fields = '__all__'
